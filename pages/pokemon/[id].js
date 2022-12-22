@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 
 import styles from "../../styles/Details.module.css";
 
-// Server Side Rendering
-export async function getServerSideProps({ params }) {
+// Static Site Generation
+export async function getStaticProps({ params }) {
 	const resp = await fetch(
 		`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${params.id}.json`
 	);
@@ -18,6 +18,34 @@ export async function getServerSideProps({ params }) {
 		},
 	};
 }
+
+export async function getStaticPaths() {
+	const resp = await fetch(
+		"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
+	);
+
+	const pokemons = await resp.json();
+
+	return {
+		paths: pokemons.map((pokemon) => ({
+			params: { id: pokemon.id.toString() },
+		})),
+		fallback: false,
+	};
+}
+
+// // Server Side Rendering
+// export async function getServerSideProps({ params }) {
+// 	const resp = await fetch(
+// 		`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${params.id}.json`
+// 	);
+
+// 	return {
+// 		props: {
+// 			pokemon: await resp.json(),
+// 		},
+// 	};
+// }
 
 //todo:-----Details component-----://
 const Details = ({ pokemon }) => {

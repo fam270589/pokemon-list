@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Card from "../components/Card";
 
-// Server Side Rendering
-export async function getServerSideProps(context) {
+// Static Site Generation
+export async function getStaticProps(context) {
 	const resp = await fetch(
 		"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
 	);
@@ -16,6 +16,20 @@ export async function getServerSideProps(context) {
 		},
 	};
 }
+
+
+// // Server Side Rendering
+// export async function getServerSideProps(context) {
+// 	const resp = await fetch(
+// 		"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
+// 	);
+
+// 	return {
+// 		props: {
+// 			pokemons: await resp.json(),
+// 		},
+// 	};
+// }
 
 export default function Home({ pokemons }) {
 	// Client Side Rendering
