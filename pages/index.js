@@ -4,22 +4,36 @@ import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
 import Card from "../components/Card";
 
-export default function Home() {
-	const [pokemons, setPokemons] = useState([]);
+// Server Side Rendering
+export async function getServerSideProps(context) {
+	const resp = await fetch(
+		"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
+	);
 
-	useEffect(() => {
-		const getPokemon = async () => {
-			const resp = await fetch(
-				"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
-			);
+	return {
+		props: {
+			pokemons: await resp.json(),
+		},
+	};
+}
 
-			setPokemons(await resp.json());
-		};
+export default function Home({ pokemons }) {
+	// Client Side Rendering
+	// const [pokemons, setPokemons] = useState([]);
 
-		getPokemon();
+	// useEffect(() => {
+	// 	const getPokemon = async () => {
+	// 		const resp = await fetch(
+	// 			"https://jherr-pokemon.s3.us-west-1.amazonaws.com/index.json"
+	// 		);
 
-		return () => {};
-	}, []);
+	// 		setPokemons(await resp.json());
+	// 	};
+
+	// 	getPokemon();
+
+	// 	return () => {};
+	// }, []);
 
 	return (
 		<div className={styles.container}>

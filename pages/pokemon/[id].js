@@ -6,28 +6,42 @@ import { useEffect, useState } from "react";
 
 import styles from "../../styles/Details.module.css";
 
+// Server Side Rendering
+export async function getServerSideProps({ params }) {
+	const resp = await fetch(
+		`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${params.id}.json`
+	);
+
+	return {
+		props: {
+			pokemon: await resp.json(),
+		},
+	};
+}
+
 //todo:-----Details component-----://
-const Details = (props) => {
-	const {
-		query: { id },
-	} = useRouter();
+const Details = ({ pokemon }) => {
+	// Client Side Rendering
+	// const {
+	// 	query: { id },
+	// } = useRouter();
 
-	const [pokemon, setPokemon] = useState(null);
+	// const [pokemon, setPokemon] = useState(null);
 
-	useEffect(() => {
-		const getPokemon = async () => {
-			const resp = await fetch(
-				`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${id}.json`
-			);
+	// useEffect(() => {
+	// 	const getPokemon = async () => {
+	// 		const resp = await fetch(
+	// 			`https://jherr-pokemon.s3.us-west-1.amazonaws.com/pokemon/${id}.json`
+	// 		);
 
-			setPokemon(await resp.json());
-		};
-		if (id) {
-			getPokemon();
-		}
+	// 		setPokemon(await resp.json());
+	// 	};
+	// 	if (id) {
+	// 		getPokemon();
+	// 	}
 
-		return () => {};
-	}, [id]);
+	// 	return () => {};
+	// }, [id]);
 
 	if (!pokemon) {
 		return null;

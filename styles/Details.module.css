@@ -12,14 +12,14 @@
 	padding: 1rem;
 	border-radius: 1rem;
 
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .image {
-  margin: 1rem;
+	margin: 1rem;
 	width: 12rem;
 	height: 12rem;
 }
@@ -27,7 +27,7 @@
 .desc {
 	background-color: aliceblue;
 	padding: 1rem;
-  margin: 1rem;
+	margin: 1rem;
 	border-radius: 1rem;
 }
 
@@ -49,22 +49,25 @@
 
 .table {
 	font-size: 0.9rem;
-  width: 100%;
+	width: 100%;
 }
 
 @media (min-width: 640px) {
-  .layout {
-    flex-direction: row;
-  }
-  .image {
-    width: 20rem;
-    height: 20rem;
-  }
+	.layout {
+		flex-direction: row;
+	}
+	.image {
+		width: 20rem;
+		height: 20rem;
+	}
+	.desc {
+		margin: 0;
+	}
 }
 
 @media (min-width: 1080px) {
-  .image {
-    width: 30rem;
-    height: 30rem;
-  }
+	.image {
+		width: 30rem;
+		height: 30rem;
+	}
 }
