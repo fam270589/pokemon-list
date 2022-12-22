@@ -17,7 +17,6 @@ export async function getStaticProps(context) {
 	};
 }
 
-
 // // Server Side Rendering
 // export async function getServerSideProps(context) {
 // 	const resp = await fetch(
